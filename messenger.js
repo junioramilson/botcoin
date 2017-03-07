@@ -139,7 +139,6 @@ const actions = {
           break;
         default:
           context.missingLugar = true;
-          fbMessage(sessions[sessionId].fbid, 'aonde?');
           return resolve(context);
       }
     });
