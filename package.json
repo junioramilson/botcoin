@@ -11,7 +11,7 @@
     "nlp",
     "automation"
   ],
-  "main": "index.js",
+  "main": "messenger.js",
   "scripts": {
     "test": "mocha ./tests/lib.js",
     "start": "node messenger.js"
