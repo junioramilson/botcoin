@@ -116,16 +116,32 @@ const actions = {
       return Promise.resolve()
     }
   },
-  getPrecoBitcoin({sessionId, context,entities}){
+  getPrecoBitcoin({sessionId, context, entities}){
     fbMessage(sessions[sessionId].fbid, 'Consultando aqui');
     return new Promise((resolve,reject)=>{
-      axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
-        .then(res=>{
-          // console.log(res.data.buy);
-          context.valor=res.data.buy
+      switch(entities.lugar){
+        case 'foxbit':
+          axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
+            .then(res=>{
+              // console.log(res.data.buy);
+              context.valor=res.data.buy
+              return resolve(context);
+            })
+          break;
+        case 'mercadobitcoin':
+          axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
+            .then(res=>{
+              // console.log(res.data.buy);
+              context.valor=res.data.buy
+              return resolve(context);
+            })
+          break;
+        default:
+          context.missLugar = true;
+          fbMessage(sessions[sessionId].fbid, 'aonde?');
           return resolve(context);
-        })
-      }) 
+      }
+    });
   }
 };
 
