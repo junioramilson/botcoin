@@ -122,6 +122,7 @@ const actions = {
     return new Promise((resolve,reject)=>{
 
       if(entities.lugar !== undefined){
+          fbMessage(sessions[sessionId].fbid, 'valor: ' + JSON.stringify(entities.lugar));
           switch(entities.lugar[0].value){
           case 'foxbit':
             context.missingLugar = false;
