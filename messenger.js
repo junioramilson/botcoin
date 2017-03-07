@@ -45,6 +45,50 @@ crypto.randomBytes(8, (err, buff) => {
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
 
+const buildGeneric = (node) =>{
+  return {
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type": "generic",
+        "elements":[{
+          "title":node.title,
+          "item_url": node.url,
+          "image_url": node.img,
+          "subtitle": node.price,
+          "buttons":[
+            {
+              "type":"web_url",
+              "url":node.url,
+              "title": "Acessar"
+            }
+          ]
+        }]
+      }
+    }
+  }
+}
+
+const fbMessageGeneric = (id, attachment) => {
+  const body = JSON.stringify({
+    recipient: { id },
+    message: { attachment },
+  });
+  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+  return fetch('https://graph.facebook.com/me/messages?' + qs, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body,
+  })
+  .then(rsp => rsp.json())
+  .then(json => {
+    if (json.error && json.error.message) {
+      throw new Error(json.error.message);
+    }
+    return json;
+  });
+};
+
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
     recipient: { id },
@@ -125,16 +169,32 @@ const actions = {
             context.missingLugar = false;
             axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
               .then(res=>{
+                let preco = {
+                  title: "Foxbit", 
+                  img: "https://foxbit.exchange/assets/exchange_logos/foxbit_social_network_share.png",
+                  price: res.data.buy,
+                  url: "https://foxbit.com.br"
+                };
                 // console.log(res.data.buy);
-                context.valor=res.data.buy
+                // context.valor=res.data.buy
+                context.terminei = true;
+                fbMessageGeneric(recipientId, buildGeneric(preco));
                 return resolve(context);
               })
             break;
           case 'mercado bitcoin':
             axios.get('https://www.mercadobitcoin.net/api/ticker/')
               .then(res=>{
+                let preco = {
+                  title: "Foxbit", 
+                  img: "https://foxbit.exchange/assets/exchange_logos/foxbit_social_network_share.png",
+                  price: res.data.ticker.buy,
+                  url: "https://foxbit.com.br"
+                };
                 // console.log(res.data.buy);
-                context.valor=res.data.ticker.buy
+                // context.valor=res.data.ticker.buy
+                fbMessageGeneric(recipientId, buildGeneric(preco));
+                context.terminei = true;
                 return resolve(context);
               })
             break;
