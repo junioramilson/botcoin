@@ -121,7 +121,7 @@ const actions = {
     
     return new Promise((resolve,reject)=>{
 
-      switch(entities.lugar){
+      switch(entities.lugar.value){
         case 'foxbit':
           context.missingLugar = false;
           axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
