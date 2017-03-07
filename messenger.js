@@ -130,7 +130,7 @@ const actions = {
                 return resolve(context);
               })
             break;
-          case 'mercadobitcoin':
+          case 'mercado bitcoin':
             axios.get('https://www.mercadobitcoin.net/api/ticker/')
               .then(res=>{
                 // console.log(res.data.buy);
