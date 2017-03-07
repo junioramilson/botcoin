@@ -70,9 +70,10 @@ const buildGeneric = (node) =>{
 }
 
 const fbMessageGeneric = (id, attachment) => {
+  console.log(attachment);
   const body = JSON.stringify({
     recipient: { id },
-    message: { attachment },
+    message: attachment,
   });
   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
   return fetch('https://graph.facebook.com/me/messages?' + qs, {
