@@ -117,12 +117,9 @@ const actions = {
     }
   },
   getPrecoBitcoin({sessionId, context, entities}){
-    fbMessage(sessions[sessionId].fbid, "OPA: " + JSON.stringify(entities.lugar));
-    
     return new Promise((resolve,reject)=>{
 
       if(entities.lugar !== undefined){
-          fbMessage(sessions[sessionId].fbid, 'valor: ' + JSON.stringify(entities.lugar));
           switch(entities.lugar[0].value){
           case 'foxbit':
             context.missingLugar = false;
@@ -134,10 +131,10 @@ const actions = {
               })
             break;
           case 'mercadobitcoin':
-            axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
+            axios.get('https://www.mercadobitcoin.net/api/ticker/')
               .then(res=>{
                 // console.log(res.data.buy);
-                context.valor=res.data.buy
+                context.valor=res.data.ticker.buy
                 return resolve(context);
               })
             break;
