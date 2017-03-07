@@ -117,7 +117,7 @@ const actions = {
     }
   },
   getPrecoBitcoin({sessionId, context, entities}){
-    fbMessage(sessions[sessionId].fbid, JSON.stringify(entities.lugar));
+    fbMessage(sessions[sessionId].fbid, "OPA: " + JSON.stringify(entities.lugar));
     
     return new Promise((resolve,reject)=>{
 
