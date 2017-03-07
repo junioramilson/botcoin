@@ -121,28 +121,36 @@ const actions = {
     
     return new Promise((resolve,reject)=>{
 
-      switch(entities.lugar[0].value){
-        case 'foxbit':
-          context.missingLugar = false;
-          axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
-            .then(res=>{
-              // console.log(res.data.buy);
-              context.valor=res.data.buy
-              return resolve(context);
-            })
-          break;
-        case 'mercadobitcoin':
-          axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
-            .then(res=>{
-              // console.log(res.data.buy);
-              context.valor=res.data.buy
-              return resolve(context);
-            })
-          break;
-        default:
+      if(entities.lugar !== undefined){
+          switch(entities.lugar[0].value){
+          case 'foxbit':
+            context.missingLugar = false;
+            axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
+              .then(res=>{
+                // console.log(res.data.buy);
+                context.valor=res.data.buy
+                return resolve(context);
+              })
+            break;
+          case 'mercadobitcoin':
+            axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
+              .then(res=>{
+                // console.log(res.data.buy);
+                context.valor=res.data.buy
+                return resolve(context);
+              })
+            break;
+          default:
+            fbMessage(sessions[sessionId].fbid, 'Lugar inexistente');
+            context.missingLugar = true;
+            return resolve(context);
+        }
+      }
+      else {
           context.missingLugar = true;
           return resolve(context);
       }
+      
     });
   }
 };
