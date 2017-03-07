@@ -47,20 +47,20 @@ crypto.randomBytes(8, (err, buff) => {
 
 const buildGeneric = (node) =>{
   return {
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type": "generic",
-        "elements":[{
-          "title":node.title,
-          "item_url": node.url,
-          "image_url": node.img,
-          "subtitle": node.price,
-          "buttons":[
+    attachment:{
+      type:"template",
+      payload:{
+        template_type: "generic",
+        elements:[{
+          title:node.title,
+          item_url: node.url,
+          image_url: node.img,
+          subtitle: node.price,
+          buttons:[
             {
-              "type":"web_url",
-              "url":node.url,
-              "title": "Acessar"
+              type:"web_url",
+              url:node.url,
+              title: "Acessar"
             }
           ]
         }]
