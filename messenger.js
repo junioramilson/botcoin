@@ -163,6 +163,7 @@ const actions = {
   },
   getPrecoBitcoin({sessionId, context, entities}){
     const recipientId = sessions[sessionId].fbid;
+    context.missingLugar = false;
     return new Promise((resolve,reject)=>{
 
       if(entities.lugar !== undefined){
