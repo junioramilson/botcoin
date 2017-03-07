@@ -174,7 +174,7 @@ const actions = {
                 let preco = {
                   title: "Foxbit", 
                   img: "https://foxbit.exchange/assets/exchange_logos/foxbit_social_network_share.png",
-                  price: res.data.buy,
+                  price: `Valor de compra: R$ ${res.data.buy}`,
                   url: "https://foxbit.com.br"
                 };
                 // console.log(res.data.buy);
@@ -188,10 +188,10 @@ const actions = {
             axios.get('https://www.mercadobitcoin.net/api/ticker/')
               .then(res=>{
                 let preco = {
-                  title: "Foxbit", 
-                  img: "https://foxbit.exchange/assets/exchange_logos/foxbit_social_network_share.png",
-                  price: res.data.ticker.buy,
-                  url: "https://foxbit.com.br"
+                  title: "Mercado bitcoin", 
+                  img: "https://www.mercadobitcoin.com.br/static/img/logo/mb-logo.png",
+                  price: `Valor de compra: R$ ${res.data.ticker.buy}`,
+                  url: "https://www.mercadobitcoin.com.br"
                 };
                 // console.log(res.data.buy);
                 // context.valor=res.data.ticker.buy
