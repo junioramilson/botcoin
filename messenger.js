@@ -118,6 +118,7 @@ const actions = {
   },
   getPrecoBitcoin({sessionId, context, entities}){
     fbMessage(sessions[sessionId].fbid, 'Consultando aqui');
+    context.missLugar = false;
     return new Promise((resolve,reject)=>{
       switch(entities.lugar){
         case 'foxbit':
