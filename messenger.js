@@ -117,8 +117,8 @@ const actions = {
     }
   },
   getPrecoBitcoin({sessionId, context,entities}){
+    fbMessage(sessions[sessionId].fbid, 'Consultando aqui');
     return new Promise((resolve,reject)=>{
-      fbMessage(sessions[sessionId].fbid, 'Consultando aqui');
       axios.get('https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC')
         .then(res=>{
           // console.log(res.data.buy);
