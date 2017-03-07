@@ -163,8 +163,9 @@ const actions = {
   },
   getPrecoBitcoin({sessionId, context, entities}){
     const recipientId = sessions[sessionId].fbid;
+
     return new Promise((resolve,reject)=>{
-      
+
       if(entities.lugar !== undefined){
           switch(entities.lugar[0].value){
           case 'foxbit':
@@ -179,7 +180,6 @@ const actions = {
                 // console.log(res.data.buy);
                 // context.valor=res.data.buy
                 context.terminei = true;
-                context.missingLugar = false;
                 fbMessageGeneric(recipientId, buildGeneric(preco));
                 return resolve(context);
               })
@@ -197,7 +197,6 @@ const actions = {
                 // context.valor=res.data.ticker.buy
                 fbMessageGeneric(recipientId, buildGeneric(preco));
                 context.terminei = true;
-                context.missingLugar = false;
                 return resolve(context);
               })
             break;
