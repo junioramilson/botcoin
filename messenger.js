@@ -117,7 +117,7 @@ const actions = {
     }
   },
   getPrecoBitcoin({sessionId, context, entities}){
-    fbMessage(sessions[sessionId].fbid, 'Consultando aqui ' + JSON.stringify(entities));
+    fbMessage(sessions[sessionId].fbid, 'Consultando aqui ' + JSON.stringify(entities.lugar));
     
     return new Promise((resolve,reject)=>{
 
